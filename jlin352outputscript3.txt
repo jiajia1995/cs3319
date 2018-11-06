@@ -1,0 +1,55 @@
+Warning: Using a password on the command line interface can be insecure.
+ERROR 1064 (42000) at line 14: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'LIKE description="%pad%" OR LIKE description="%Pad%"' at line 1
+--------------
+SELECT description FROM product
+--------------
+
+description
+NULL
+Bike
+Socks
+Elbow pads
+Knee Pads
+Roller Blades
+Helmet
+makeup
+--------------
+SELECT DISTINCT city FROM customer
+--------------
+
+city
+Boston
+Springfield
+Kypto
+Providence
+--------------
+SELECT * FROM agent ORDER BY city
+--------------
+
+agentID	FirstN	LastN	city	commission
+33	David	Letterman	Bedrock	100
+11	Regis	Philbin	Boston	33
+1	Jialin	Lin	London	100
+22	Courtney	Cox	New York	25
+12	Rosie	Cox	Ottawa	50
+66	Rosie	ODonnell	Ottawa	100
+99	Hugh	Grant	Springfild	16
+--------------
+SELECT firstN,lastN FROM customer WHERE city="Springfield"
+--------------
+
+firstN	lastN
+Monty	Burns
+Homer	Simpson
+Sideshow	Bob
+--------------
+SELECT customer.lastN FROM ACinfo LEFT JOIN customer ON customer.customerID=ACinfo.customerID JOIN agent ON ACinfo.agentID=agent.agentID WHERE agent.FirstN="Regis"
+--------------
+
+lastN
+Rubble
+Flintstone
+--------------
+SELECT * FROM product WHERE LIKE description="%pad%" OR LIKE description="%Pad%"
+--------------
+

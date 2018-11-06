@@ -1,0 +1,74 @@
+Warning: Using a password on the command line interface can be insecure.
+--------------
+SHOW DATABASES
+--------------
+
+Database
+information_schema
+jlin352
+jlin352352assign2db
+jlin352assign2db
+mysql
+performance_schema
+--------------
+DROP DATABASE IF EXISTS jlin352assign2db
+--------------
+
+--------------
+CREATE DATABASE jlin352assign2db
+--------------
+
+--------------
+GRANT USAGE ON *.* TO 'ta'@'localhost'
+--------------
+
+--------------
+DROP USER 'ta'@'localhost'
+--------------
+
+--------------
+CREATE USER 'ta'@'localhost' IDENTIFIED BY 'cs3319'
+--------------
+
+--------------
+GRANT ALL PRIVILEGES ON yourwesternuseridassign2db.* TO 'ta'@'localhost'
+--------------
+
+--------------
+FLUSH PRIVILEGES
+--------------
+
+--------------
+SHOW TABLES
+--------------
+
+--------------
+CREATE TABLE product(productID INT NOT NULL,description VARCHAR(20),cost DOUBLE, quantity INT,PRIMARY KEY(productID))
+--------------
+
+--------------
+CREATE TABLE customer(customerID INT NOT NULL, firstN VARCHAR(30),lastN VARCHAR(30),city VARCHAR(15),phone VARCHAR(8), PRIMARY KEY(customerID))
+--------------
+
+--------------
+CREATE TABLE agent(agentID INT NOT NULL, FirstN VARCHAR(30), LastN VARCHAR(30),city VARCHAR(15),commission INT, PRIMARY KEY(agentID))
+--------------
+
+--------------
+CREATE TABLE purchasInfo(customerID INT, productID INT,quantity INT, FOREIGN KEY(customerID) REFERENCES customer(customerID),FOREIGN KEY(productID) REFERENCES product(productID))
+--------------
+
+--------------
+CREATE TABLE ACinfo(customerID INT,agentID INT, FOREIGN KEY(customerID) REFERENCES customer(customerID),FOREIGN KEY(agentID) REFERENCES agent(agentID))
+--------------
+
+--------------
+SHOW TABLES
+--------------
+
+Tables_in_jlin352assign2db
+ACinfo
+agent
+customer
+product
+purchasInfo

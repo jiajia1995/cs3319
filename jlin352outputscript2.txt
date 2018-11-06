@@ -1,0 +1,291 @@
+Warning: Using a password on the command line interface can be insecure.
+--------------
+LOAD DATA LOCAL INFILE "products.txt" IGNORE INTO TABLE product FIELDS TERMINATED BY ',' ENCLOSED BY ""
+--------------
+
+--------------
+INSERT INTO product(productID,description,cost,quantity) VALUE("66","Elbow pads","14.25","120")
+--------------
+
+--------------
+INSERT INTO product VALUE("999","makeup","12.33","100")
+--------------
+
+--------------
+INSERT INTO agent(agentID,FirstN,LastN,city,commission) VALUE("99","Hugh","Grant","Springfild","16")
+--------------
+
+--------------
+INSERT INTO agent VALUE("22","Courtney","Cox","New York","25")
+--------------
+
+--------------
+INSERT INTO agent VALUE("66","Rosie","ODonnell","Ottawa","100")
+--------------
+
+--------------
+INSERT INTO agent VALUE("33","David","Letterman","Bedrock","100")
+--------------
+
+--------------
+INSERT INTO agent VALUE("11","Regis","Philbin","Boston","33")
+--------------
+
+--------------
+INSERT INTO agent VALUE("12","Rosie","Cox","Ottawa","50")
+--------------
+
+--------------
+INSERT INTO agent VALUE("01","Jialin","Lin","London","100")
+--------------
+
+--------------
+INSERT INTO customer(customerID,firstN,lastN,city,phone) VALUE("21","Homer","Simpson","Springfield","686-8956")
+--------------
+
+--------------
+INSERT INTO customer VALUE("31","Sideshow","Bob","Springfield","686-5555")
+--------------
+
+--------------
+INSERT INTO customer VALUE("12","Monty","Burns","Springfield","789-0000")
+--------------
+
+--------------
+INSERT INTO customer VALUE("15","Fred","Flintstone","Bedrock","777-2345")
+--------------
+
+--------------
+INSERT INTO customer VALUE("13","Super","Man","Kypto","888-1234")
+--------------
+
+--------------
+INSERT INTO customer VALUE("10","Barney","Rubble","Bedrock","777-1234")
+--------------
+
+--------------
+INSERT INTO customer VALUE("14","Peter","Griffens","Providence","987-4567")
+--------------
+
+--------------
+INSERT INTO purchasInfo(customerID,quantity,productID) VALUE("21","20","99")
+--------------
+
+--------------
+INSERT INTO purchasInfo(customerID,quantity,productID) VALUE("21","14","12")
+--------------
+
+--------------
+INSERT INTO purchasInfo(customerID,quantity,productID) VALUE("21","10","66")
+--------------
+
+--------------
+INSERT INTO purchasInfo(customerID,quantity,productID) VALUE("31","1","99")
+--------------
+
+--------------
+INSERT INTO purchasInfo(customerID,quantity,productID) VALUE("31","2","12")
+--------------
+
+--------------
+INSERT INTO purchasInfo(customerID,quantity,productID) VALUE("31","4","78")
+--------------
+
+--------------
+INSERT INTO purchasInfo(customerID,quantity,productID) VALUE("31","2","66")
+--------------
+
+--------------
+INSERT INTO purchasInfo(customerID,quantity,productID) VALUE("15","2","66")
+--------------
+
+--------------
+INSERT INTO purchasInfo(customerID,quantity,productID) VALUE("15","2","78")
+--------------
+
+--------------
+INSERT INTO purchasInfo(customerID,quantity,productID) VALUE("15","19","66")
+--------------
+
+--------------
+INSERT INTO ACinfo(customerID,agentID) VALUE("21","99")
+--------------
+
+--------------
+INSERT INTO ACinfo(customerID,agentID) VALUE("12","99")
+--------------
+
+--------------
+INSERT INTO ACinfo(customerID,agentID) VALUE("14","99")
+--------------
+
+--------------
+INSERT INTO ACinfo(customerID,agentID) VALUE("13","33")
+--------------
+
+--------------
+INSERT INTO ACinfo(customerID,agentID) VALUE("10","11")
+--------------
+
+--------------
+INSERT INTO ACinfo(customerID,agentID) VALUE("15","11")
+--------------
+
+--------------
+INSERT INTO ACinfo(customerID,agentID) VALUE("31","66")
+--------------
+
+--------------
+SHOW TABLES
+--------------
+
+Tables_in_jlin352assign2db
+ACinfo
+agent
+customer
+product
+purchasInfo
+--------------
+SELECT * FROM product
+--------------
+
+productID	description	cost	quantity
+0	NULL	NULL	NULL
+11	Bike	150	200
+12	Socks	2	100
+66	Elbow pads	14.25	120
+78	Knee Pads	12.15	70
+88	Roller Blades	75	89
+99	Helmet	29	30
+999	makeup	12.33	100
+--------------
+SELECT * FROM agent
+--------------
+
+agentID	FirstN	LastN	city	commission
+1	Jialin	Lin	London	100
+11	Regis	Philbin	Boston	33
+12	Rosie	Cox	Ottawa	50
+22	Courtney	Cox	New York	25
+33	David	Letterman	Bedrock	100
+66	Rosie	ODonnell	Ottawa	100
+99	Hugh	Grant	Springfild	16
+--------------
+SELECT * FROM customer
+--------------
+
+customerID	firstN	lastN	city	phone
+10	Barney	Rubble	Bedrock	777-1234
+12	Monty	Burns	Springfield	789-0000
+13	Super	Man	Kypto	888-1234
+14	Peter	Griffens	Providence	987-4567
+15	Fred	Flintstone	Bedrock	777-2345
+21	Homer	Simpson	Springfield	686-8956
+31	Sideshow	Bob	Springfield	686-5555
+--------------
+SELECT * FROM purchasInfo
+--------------
+
+customerID	productID	quantity
+21	99	20
+21	12	14
+21	66	10
+31	99	1
+31	12	2
+31	78	4
+31	66	2
+15	66	2
+15	78	2
+15	66	19
+--------------
+SELECT * FROM ACinfo
+--------------
+
+customerID	agentID
+21	99
+12	99
+14	99
+13	33
+10	11
+15	11
+31	66
+--------------
+UPDATE customer SET firstN="Wonder" WHERE lastN="Man"
+--------------
+
+--------------
+UPDATE customer SET lastN="Woman" WHERE firstN="Wonder"
+--------------
+
+--------------
+UPDATE purchasInfo INNER JOIN customer ON purchasInfo.customerID = customer.customerID SET quantity=5 WHERE customer.firstN="Sideshow"
+--------------
+
+--------------
+UPDATE ACinfo a LEFT JOIN agent b ON a.agentID=b.agentID LEFT JOIN customer c ON a.customerID=c.customerID SET c.city="Boston" WHERE b.FirstN="Regis"
+--------------
+
+--------------
+SELECT * FROM agent
+--------------
+
+agentID	FirstN	LastN	city	commission
+1	Jialin	Lin	London	100
+11	Regis	Philbin	Boston	33
+12	Rosie	Cox	Ottawa	50
+22	Courtney	Cox	New York	25
+33	David	Letterman	Bedrock	100
+66	Rosie	ODonnell	Ottawa	100
+99	Hugh	Grant	Springfild	16
+--------------
+SELECT * FROM customer
+--------------
+
+customerID	firstN	lastN	city	phone
+10	Barney	Rubble	Boston	777-1234
+12	Monty	Burns	Springfield	789-0000
+13	Wonder	Woman	Kypto	888-1234
+14	Peter	Griffens	Providence	987-4567
+15	Fred	Flintstone	Boston	777-2345
+21	Homer	Simpson	Springfield	686-8956
+31	Sideshow	Bob	Springfield	686-5555
+--------------
+SELECT * FROM product
+--------------
+
+productID	description	cost	quantity
+0	NULL	NULL	NULL
+11	Bike	150	200
+12	Socks	2	100
+66	Elbow pads	14.25	120
+78	Knee Pads	12.15	70
+88	Roller Blades	75	89
+99	Helmet	29	30
+999	makeup	12.33	100
+--------------
+SELECT * FROM purchasInfo
+--------------
+
+customerID	productID	quantity
+21	99	20
+21	12	14
+21	66	10
+31	99	5
+31	12	5
+31	78	5
+31	66	5
+15	66	2
+15	78	2
+15	66	19
+--------------
+SELECT * FROM ACinfo
+--------------
+
+customerID	agentID
+21	99
+12	99
+14	99
+13	33
+10	11
+15	11
+31	66
