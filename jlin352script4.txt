@@ -1,0 +1,30 @@
+
+USE jlin352assign2db;
+
+-- show all
+SELECT * FROM product;
+SELECT * FROM customer;
+SELECT * FROM agent;
+SELECT * FROM ACinfo;
+SELECT * FROM purchasInfo;
+
+-- create view call together
+CREATE VIEW together AS 
+SELECT customer.firstN,customer.lastN,product.description,product.quantity,product.cost,purchasInfo.quantity*product.cost AS totalcost 
+FROM purchasInfo JOIN customer ON purchasInfo.customerID=customer.customerID JOIN product ON product.productID=purchasInfo.productID
+ORDER BY customer.lastN;
+
+-- show all datas
+SELECT * FROM together;
+
+-- spend more than 100
+SELECT *FROM together WHERE totalcost>100;
+
+-- this can delete because this do not have other info which include foreign key 
+DELETE FROM product WHERE description="makeup";
+
+-- check for the delete
+SELECT * FROM product;
+
+-- cannot delete , since there have some data in the ACinfo with foregin key which is agentID.
+

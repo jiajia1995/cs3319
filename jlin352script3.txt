@@ -1,0 +1,33 @@
+-- file3
+USE jlin352assign2db;
+-- 1
+SELECT description FROM product;
+-- 2
+SELECT DISTINCT city FROM customer;
+-- 3
+SELECT * FROM agent ORDER BY city;
+-- 4
+SELECT firstN,lastN FROM customer WHERE city="Springfield";
+-- 5
+SELECT customer.lastN FROM ACinfo LEFT JOIN customer ON customer.customerID=ACinfo.customerID JOIN agent ON ACinfo.agentID=agent.agentID WHERE agent.FirstN="Regis";
+-- 6
+SELECT * FROM product WHERE LIKE description="%pad%" OR LIKE description="%Pad%";
+-- 7
+SELECT customer.lastN,product.description,purchasInfo.quantity FROM purchasInfo JOIN customer ON purchasInfo.customerID=customer.customerID JOIN product ON purchasInfo.productID=product.productID;
+-- 8
+SELECT SUM(purchasInfo.quantity) AS "Homer's Total Purchases" FROM purchasInfo JOIN customer ON purchasInfo.customerID=customer.customerID JOIN product ON purchasInfo.productID=product.productID WHERE customer.firstN="Homer" GROUP BY customer.firstN;
+-- 9
+SELECT SUM(purchasInfo.quantity) AS "total product",customer.firstN,customer.lastN FROM purchasInfo JOIN customer ON purchasInfo.customerID=customer.customerID GROUP BY customer.firstN;
+-- 10
+SELECT product.description,product.quantity FROM product LEFT JOIN purchasInfo ON product.productID=purchasInfo.productID WHERE purchasInfo.quantity=NULL;
+-- 11
+SELECT product.description,product.quantity FROM product LEFT JOIN purchasInfo ON product.productID=purchasInfo.productID JOIN customer ON customer.customerID=purchasInfo.customerID WHERE customer.firstN<>"fred" AND customer.lastN<>"Flintstone";
+-- 12
+SELECT agent.FirstN,agent.LastN,customer.firstN,customer.lastN FROM ACinfo JOIN customer ON customer.customerID=ACinfo.customerID JOIN agent ON agent.agentID=ACinfo.agentID WHERE agent.city=customer.city;
+-- 13
+SELECT SUM(quantity) AS "total knee pads had been purchased is" FROM purchasInfo WHERE productID="78";
+-- 14
+SELECT DISTINCT description FROM product INNER JOIN purchasInfo ON product.productID WHERE (SELECT COUNT(*) FROM purchasInfo WHERE product.productID=purchasInfo.productID)>3;
+-- 15
+SELECT agent.FirstN,agent.LastN FROM purchasInfo JOIN customer ON purchasInfo.customerID=customer.customerID JOIN ACinfo ON purchasInfo.customerID=ACinfo.customerID JOIN agent ON agent.agentID=ACinfo.agentID WHERE purchasInfo.productID="78";
+ 
